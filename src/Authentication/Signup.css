@@ -1,0 +1,86 @@
+.signup {
+  background-color: #eeeeee;
+  width: 100%;
+  height: 100%;
+}
+
+.signup__from {
+  padding: 1.375rem 0.8rem 1.5rem;
+  width: 25.5rem;
+  max-width: 96vw;
+}
+
+.signup__tagline {
+  font-weight: 600;
+  font-size: 22px;
+}
+
+.signup__userRole > h3 {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.signup__userRole > .userRole__btns {
+  margin-top: 1.5rem !important;
+}
+
+.userRole__btns > span {
+  padding: 0.7rem 1rem;
+  text-transform: inherit;
+  border: 1px solid #ccc;
+  user-select: none;
+  transition: all 0.2s;
+}
+
+.activeTab {
+  border: 1px solid rgb(240, 59, 89);
+  background-color: #5167e0;
+  color: white;
+  box-shadow: -2px -2px 3px rgba(0, 0, 0, 0.4), 0px 3px 3px rgba(0, 0, 0, 0.4);
+}
+
+.signup__inputs {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 2rem;
+}
+
+.signup__input {
+  width: 90%;
+  margin: 0.5rem 0 !important;
+}
+
+.signup__btn {
+  padding: 0.5rem 5rem !important;
+  margin-top: 2.3rem !important;
+}
+
+.signup__providers {
+  margin-top: 1.5rem;
+}
+
+.signup__providers > h3 {
+  font-size: 18px;
+  font-weight: 500;
+  margin-top: 0.35rem;
+}
+
+.signup__providersBtns > button {
+  padding: 0.5rem 1rem;
+  text-transform: inherit;
+  font-size: 18px;
+  margin: 0.6rem 0 0.5rem;
+}
+
+.googleIcon {
+  width: 30px;
+  margin-right: 0.65rem;
+}
+
+.authExcahnge__link {
+  font-size: 15px;
+  margin-top: 0.65rem;
+}

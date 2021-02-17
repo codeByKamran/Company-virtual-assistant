@@ -1,0 +1,4 @@
+.... Employee Departments List Pattern
+.... Authentication
+.... Implemanting LocalStorage
+.... Draft functionality

@@ -1,0 +1,72 @@
+.table {
+  margin-top: 1.25rem;
+}
+
+.table__head > .table__row {
+  background-color: #e4e4e4;
+  background-color: #d8deff;
+}
+
+.table__head > .table__row > .table__cell {
+  font-weight: 600 !important;
+}
+
+.table__body > .table__row > .table__cell {
+  font-weight: 400 !important;
+}
+
+.table__body > .table__row:hover {
+  background-color: #f5f5f5;
+  cursor: pointer;
+}
+
+.table__header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 0.65rem !important;
+}
+
+.table__formInput {
+  flex: 1;
+}
+
+.tableHeader__button {
+  text-transform: inherit !important;
+  margin: 0 0 0 1.5rem !important;
+}
+
+.popup__header {
+  border-bottom: 1px solid rgb(226, 226, 226) !important;
+  padding: 0.45rem 0 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.popup__header > h3 {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.popupClose__btn {
+  background-color: #ff99bd52 !important;
+  padding: 4px !important;
+}
+
+.tableRow__actionBtn:nth-child(1) {
+  margin-right: 2.5px !important;
+}
+
+.tableRow__actionBtn:nth-child(2) {
+  margin: 0 2.5px !important;
+}
+
+.tableRow__actionBtn:nth-child(3) {
+  margin-left: 2.5px !important;
+}
+
+.noEmployees__tagline {
+  font-size: 17px;
+  text-align: center;
+  margin: 1.75rem 0 0.8rem;
+}
