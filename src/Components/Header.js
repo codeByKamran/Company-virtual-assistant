@@ -8,15 +8,15 @@ import {
   Toolbar,
 } from "@material-ui/core";
 import {
-  BorderAll,
   ChatBubbleOutline,
+  NotificationsActive,
   NotificationsNone,
-  PowerSettingsNew,
   Search,
 } from "@material-ui/icons";
 import "./Header.css";
+import { Link } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ notifications, messages }) => {
   return (
     <AppBar className="app__header" position="static">
       <Toolbar>
@@ -31,22 +31,42 @@ const Header = () => {
           <Grid sm item />
 
           <Grid item>
-            <IconButton color="secondary">
-              <Badge color="secondary" badgeContent={4}>
-                <NotificationsNone className="header__icon" fontSize="small" />
-              </Badge>
-            </IconButton>
-            <IconButton color="secondary">
-              <Badge color="secondary" badgeContent={2}>
-                <ChatBubbleOutline className="header__icon" fontSize="small" />
-              </Badge>
-            </IconButton>
-            {/* <IconButton
-              onClick={signoutHandler}
-              color={currentUser ? "secondary" : "primary"}
-            >
-              <PowerSettingsNew className="header__icon" fontSize="small" />
-            </IconButton> */}
+            <Link to="/notifications">
+              <IconButton color="secondary">
+                <Badge
+                  className="headerIcons__badge"
+                  color="secondary"
+                  badgeContent={notifications}
+                >
+                  {notifications > 0 ? (
+                    <NotificationsActive
+                      className="header__icon"
+                      color="secondary"
+                    />
+                  ) : (
+                    <NotificationsNone
+                      className="header__icon"
+                      color="secondary"
+                    />
+                  )}
+                </Badge>
+              </IconButton>
+            </Link>
+            <Link to="messages">
+              <IconButton color="secondary">
+                <Badge
+                  className="headerIcons__badge"
+                  color="secondary"
+                  badgeContent={messages}
+                >
+                  <ChatBubbleOutline
+                    className="header__icon"
+                    fontSize="small"
+                    color="secondary"
+                  />
+                </Badge>
+              </IconButton>
+            </Link>
           </Grid>
         </Grid>
       </Toolbar>

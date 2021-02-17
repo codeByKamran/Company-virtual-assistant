@@ -1,4 +1,2 @@
-.... Employee Departments List Pattern
-.... Authentication
-.... Implemanting LocalStorage
-.... Draft functionality
+.... Code Clearing 
+.... Final Testing

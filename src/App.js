@@ -4,7 +4,7 @@ import "./App.css";
 import SideMenu from "./Components/SideMenu";
 import Header from "./Components/Header";
 import { theme } from "./Files/MuiTheme";
-import AppDynamicSection from "./Components/AppDynamicSection";
+import Employees from "./Components/Employees";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setEmployeesList,
@@ -23,19 +23,22 @@ import {
   getFromLocalStorage,
   setToLocalStorage,
 } from "./Components/files/LocalStorage";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Signup from "./Authentication/Signup";
 import Signin from "./Authentication/Signin";
 import GradientLoader from "./Components/loading/GradientLoader";
+import Popup from "./Components/Popup";
+
 import {
   selectLoadingState,
   setLoading,
   setShrinkSideBar,
 } from "./redux/slices/generalSlice";
-import Popup from "./Components/Popup";
 import GoogleAuthPhaseTwo from "./Authentication/GoogleSignupPhaseTwo";
 import { sortById } from "./Components/files/utils";
 import SignupPhaseTwo from "./Authentication/SignupPhaseTwo";
+import PendingSection from "./Components/PendingSection";
+import Welcome from "./Components/Welcome";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -43,9 +46,10 @@ const App = () => {
   const userCollection = useSelector(selectUserCollec);
   const currentUserDBDetails = useSelector(selectCurrentUserDBDetails);
   const loadingState = useSelector(selectLoadingState);
-  const [tempUsers, setTempUsers] = useState([]);
+  const [dynamicSectionToRender, setDynamicSectionToRender] = useState(<></>);
 
   // == Media queries in JS == //
+
   function myFunction(querry) {
     if (querry.matches) {
       dispatch(setShrinkSideBar(true));
@@ -58,43 +62,35 @@ const App = () => {
   myFunction(querry);
   querry.addListener(myFunction);
 
-  // Fetch All user details
-
   useEffect(() => {
     console.log("Current logged in User >>>>", currentUser);
 
-    // Will not be called if userRole is already present in localStorage
-
-    const fetchCollectionFromDB = () => {
-      console.log("Called");
-      return db
-        .collection("all_users")
-        .onSnapshot((snapshot) =>
-          snapshot.docs
-            .map((doc) => doc.data())
-            .find((user) => user?.uid == currentUser?.uid)
-        );
-    };
-
-    dispatch(
-      setUserCollection(
-        getFromLocalStorage("userRole")
-          ? `${getFromLocalStorage("userRole")}s`
-          : `${fetchCollectionFromDB?.userRole}s`
-      )
-    );
-  }, [currentUser]);
-
-  useEffect(() => {
-    if (currentUser) {
-      db.collection(userCollection)
+    if (getFromLocalStorage("userRole")) {
+      dispatch(setUserCollection(getFromLocalStorage("userRole")));
+    } else {
+      db.collection("all_users")
         .doc(currentUser?.uid)
         .get()
         .then((doc) => {
           if (doc.exists) {
-            dispatch(setCurrentUserDBDetails(doc.data()));
+            dispatch(setUserCollection(`${doc.data()?.userRole}s`));
           }
         });
+    }
+  }, [currentUser]);
+
+  useEffect(() => {
+    if (currentUser) {
+      if (userCollection) {
+        db.collection(userCollection)
+          .doc(currentUser?.uid)
+          .get()
+          .then((doc) => {
+            if (doc.exists) {
+              dispatch(setCurrentUserDBDetails(doc.data()));
+            }
+          });
+      }
     }
   }, [currentUser, userCollection]);
 
@@ -113,8 +109,6 @@ const App = () => {
     }
   }, [currentUserDBDetails]);
 
-  // Fetch and Set Employee List to store
-
   useEffect(() => {
     if (currentUser && userCollection) {
       db.collection(userCollection)
@@ -132,8 +126,6 @@ const App = () => {
         });
     }
   }, [currentUser, userCollection]);
-
-  // Persist User in Store and Browser
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
@@ -178,8 +170,71 @@ const App = () => {
             <Route exact path="/">
               <SideMenu />
               <div className="app__changeableContent">
-                <Header />
-                <AppDynamicSection />
+                <Header notifications={2} messages={1} />
+                <Welcome />
+              </div>
+            </Route>
+            <Route path="/employees">
+              <SideMenu />
+              <div className="app__changeableContent">
+                <Header notifications={2} messages={1} />
+                <Employees />
+              </div>
+            </Route>
+            <Route path="/interviews">
+              <SideMenu />
+              <div className="app__changeableContent">
+                <Header notifications={2} messages={1} />
+                <PendingSection version={0.2} />
+              </div>
+            </Route>
+            <Route path="/meetings">
+              <SideMenu />
+              <div className="app__changeableContent">
+                <Header notifications={2} messages={1} />
+                <PendingSection version={0.3} />
+              </div>
+            </Route>
+            <Route path="/company-events">
+              <SideMenu />
+              <div className="app__changeableContent">
+                <Header notifications={2} messages={1} />
+                <PendingSection version={0.4} />
+              </div>
+            </Route>
+            <Route path="/stock-news">
+              <SideMenu />
+              <div className="app__changeableContent">
+                <Header notifications={2} messages={1} />
+                <PendingSection version={0.5} />
+              </div>
+            </Route>
+            <Route path="/frequently-asked-questions">
+              <SideMenu />
+              <div className="app__changeableContent">
+                <Header notifications={2} messages={1} />
+                <PendingSection version="Testing" />
+              </div>
+            </Route>
+            <Route path="/help">
+              <SideMenu />
+              <div className="app__changeableContent">
+                <Header notifications={2} messages={1} />
+                <PendingSection version="Testing" />
+              </div>
+            </Route>
+            <Route path="/notifications">
+              <SideMenu />
+              <div className="app__changeableContent">
+                <Header notifications={2} messages={1} />
+                <PendingSection version={0.6} />
+              </div>
+            </Route>
+            <Route path="/messages">
+              <SideMenu />
+              <div className="app__changeableContent">
+                <Header notifications={2} messages={1} />
+                <PendingSection version={0.7} />
               </div>
             </Route>
 
